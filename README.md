@@ -1,4 +1,4 @@
-🖼️ Photo Stack Carousel
+# 🖼️ Photo Stack Carousel
 
 A responsive, animated 3D photo carousel with a stacked "frame" aesthetic, built using HTML, CSS, and JavaScript.
 
