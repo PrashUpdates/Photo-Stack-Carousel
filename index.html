@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Stack Carousel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="gallery-card">
+    <div class="gallery-header">
+      <span class="frame-label" id="frameLabel">FRAME 01</span>
+      <span class="frame-count" id="frameCount">01 / 05</span>
+    </div>
+
+    <div class="stage-wrap">
+      <div class="stage" id="stage"></div>
+    </div>
+
+    <div class="caption">
+      <h2 id="captionTitle"></h2>
+      <p id="captionSub"></p>
+    </div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="prevBtn" aria-label="Previous">&#8249;</button>
+      <div class="progress" id="progress"></div>
+      <button class="ctrl-btn" id="nextBtn" aria-label="Next">&#8250;</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600&display=swap');
+
+:root{
+  --paper: #f3ede2;
+  --paper-deep: #e9e0d0;
+  --ink: #2a2620;
+  --ink-soft: #6f6656;
+  --line: rgba(42,38,32,0.12);
+  --moss: #3f4d38;
+  --moss-soft: rgba(63,77,56,0.14);
+  --card-w: clamp(150px, 26vw, 220px);
+  --card-h: calc(var(--card-w) * 1.32);
+}
+
+*{box-sizing:border-box;}
+
+html, body{
+  margin:0;
+  min-height:100vh;
+}
+
+body{
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 0%, #1c66c9 0%, #0f4faa 55%, #0b3f8c 100%);
+  color:var(--ink);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 40px 16px;
+}
+
+/* ---------- Outer paper card ---------- */
+.gallery-card{
+  width: 100%;
+  max-width: 620px;
+  background: var(--paper);
+  border-radius: 28px;
+  padding: 28px 28px 22px;
+  box-shadow:
+    0 40px 80px rgba(6,20,50,0.35),
+    0 1px 0 rgba(255,255,255,0.5) inset;
+  position: relative;
+}
+
+.gallery-header{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  margin-bottom: 18px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.gallery-header .frame-label{
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ---------- Stage (the stacked photos) ---------- */
+.stage-wrap{
+  position:relative;
+  overflow:hidden;
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+}
+
+.stage{
+  position:relative;
+  height: calc(var(--card-h) + 40px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective: 1400px;
+  touch-action: pan-y;
+}
+
+.card{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  margin:auto;
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: 25px;
+  overflow:hidden;
+  background: #d8d0bf;
+  box-shadow: 0 18px 35px rgba(20,15,5,0.28);
+  cursor: grab;
+  will-change: transform, opacity;
+  transition: transform 0.65s cubic-bezier(.22,1,.36,1), opacity 0.55s ease;
+  user-select:none;
+}
+
+.card.dragging{ transition:none; cursor:grabbing; }
+
+.card.dragging{ transition:none; cursor:grabbing; }
+
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  pointer-events:none;
+  -webkit-user-drag:none;
+  display:block;
+  filter: saturate(1.02);
+}
+
+.card.placeholder{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding: 14px;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  border: 1.5px dashed var(--line);
+  background: var(--paper-deep);
+
+}
+
+/* ---------- Caption ---------- */
+.caption{
+  text-align:center;
+  margin-top: 20px;
+  min-height: 56px;
+}
+
+.caption h2{
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 500;
+  font-size: 1.3rem;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.2px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.caption p{
+  margin:0;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* ---------- Control pill ---------- */
+.controls{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.ctrl-btn{
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font-size: 1rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  flex-shrink:0;
+  transition: background 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+}
+
+.ctrl-btn:hover{ background: var(--moss-soft); border-color: var(--moss); }
+.ctrl-btn:active{ transform: scale(0.9); }
+.ctrl-btn:disabled{ opacity:0.3; cursor:default; pointer-events:none; }
+
+.progress{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding: 10px 16px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background: #cfc6b4;
+  cursor:pointer;
+  transition: background 0.3s ease, width 0.3s ease;
+}
+
+.dot.active{
+  background: var(--moss);
+  width: 22px;
+  border-radius: 3px;
+}
+
+@media (max-width: 420px){
+  .gallery-card{ padding: 20px 16px 18px; }
+  .controls{ gap: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .card{ transition:none; }
+  .dot{ transition:none; }
+}
